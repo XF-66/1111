@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广东开放大学 - 在读证明</title>
+    <style>
+        :root {
+            --dark-green: #0f5b3e;
+            --text: #2c3e50;
+            --font-serif: "SimSun", "宋体", "Noto Serif SC", "Times New Roman", serif;
+            --font-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            --seal-red: #c44b4b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e9ecef;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            font-family: var(--font-sans);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .certificate-wrapper {
+            width: 100%;
+            max-width: 800px;
+            background: #fff;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            border-radius: 4px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .certificate-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 2px solid #c8d6cf;
+            pointer-events: none;
+            border-radius: 2px;
+        }
+
+        .certificate {
+            padding: 40px 50px 50px;
+            position: relative;
+        }
+
+        .school-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .school-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: var(--dark-green);
+            border-radius: 50%;
+            margin-bottom: 12px;
+            position: relative;
+            box-shadow: 0 3px 10px rgba(15, 91, 62, 0.25);
+        }
+
+        .school-logo::after {
+            content: '';
+            position: absolute;
+            width: 34px;
+            height: 34px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            top: 15px;
+            left: 15px;
+            background: transparent;
+            box-shadow: 0 0 0 3px var(--dark-green);
+        }
+
+        .school-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-green);
+            letter-spacing: 4px;
+            font-family: var(--font-serif);
+            margin-top: 6px;
+        }
+
+        .school-eng {
+            font-size: 13px;
+            color: #5e7c6e;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .cert-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            margin: 20px 0 30px;
+            color: #1e3b2f;
+            font-family: var(--font-serif);
+            position: relative;
+        }
+
+        .cert-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #b99b6b;
+            margin: 10px auto 0;
+            border-radius: 1px;
+        }
+
+        .cert-content {
+            font-size: 16px;
+            font-family: var(--font-serif);
+            line-height: 2.2;
+            margin: 20px 0 30px;
+            color: #2d3e34;
+            letter-spacing: 0.5px;
+        }
+
+        .student-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 40px;
+            margin: 16px 0;
+        }
+
+        .info-item {
+            display: flex;
+            width: calc(50% - 20px);
+            border-bottom: 1px dashed #b7c4bd;
+            padding: 6px 0;
+            font-size: 15px;
+        }
+
+        .info-item .label {
+            font-weight: bold;
+            color: #3b5848;
+            width: 85px;
+            flex-shrink: 0;
+        }
+
+        .info-item .value {
+            color: #1e3b2f;
+            letter-spacing: 0.5px;
+        }
+
+        .cert-text {
+            margin-top: 20px;
+            text-indent: 2em;
+            font-size: 16px;
+        }
+
+        .signature-area {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            margin-top: 40px;
+            gap: 50px;
+        }
+
+        .university-seal {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            flex-shrink: 0;
+            transform: rotate(-15deg);
+            opacity: 0.92;
+        }
+
+        .seal-border {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1.2px solid var(--seal-red);
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            background: transparent;
+            z-index: 0;
+        }
+
+        .seal-star {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            color: var(--seal-red);
+            line-height: 1;
+            z-index: 1;
+        }
+
+        .seal-arc {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .seal-arc span {
+            position: absolute;
+            left: 50%;
+            top: 6px;
+            transform-origin: 0 54px;
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--seal-red);
+            font-family: var(--font-serif);
+            letter-spacing: 2px;
+        }
+
+        .seal-number {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 9px;
+            font-weight: bold;
+            color: var(--seal-red);
+            font-family: var(--font-serif);
+            letter-spacing: 0.3px;
+            z-index: 2;
+            white-space: nowrap;
+        }
+
+        .seal-bottom {
+            display: none;
+        }
+
+        .signature-text {
+            text-align: right;
+            font-size: 15px;
+            color: #2d3e34;
+            font-weight: 500;
+            padding-bottom: 20px;
+        }
+
+        .signature-text .date {
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        .action-bar {
+            max-width: 800px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 5px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .action-bar a {
+            color: #0f5b3e;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 6px 14px;
+            border: 1px solid #c8d6cf;
+            border-radius: 20px;
+            transition: 0.2s;
+            background: #fff;
+            display: inline-block;
+        }
+
+        .action-bar a:hover {
+            background: #e6f2ed;
+            border-color: #0f5b3e;
+            text-decoration: none;
+        }
+
+        .btn-print {
+            background: var(--dark-green);
+            color: #fff;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+            letter-spacing: 1px;
+            border: 1px solid var(--dark-green);
+        }
+
+        .btn-print:hover {
+            background: #09422c;
+        }
+
+        .verification {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .certificate-wrapper {
+                box-shadow: none;
+                border: none;
+                max-width: 100%;
+            }
+            .certificate-wrapper::before {
+                border: 1px solid #000;
+            }
+            .action-bar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-wrapper" id="certificate">
+        <div class="certificate">
+            <div class="school-header">
+                <div class="school-logo" title="广东开放大学校徽"></div>
+                <div class="school-name">广东开放大学</div>
+                <div class="school-eng">THE OPEN UNIVERSITY OF GUANGDONG</div>
+            </div>
+
+            <div class="cert-title">在 读 证 明</div>
+
+            <div class="cert-content">
+                <div class="student-info">
+                    <div class="info-item">
+                        <span class="label">姓　名：</span>
+                        <span class="value">陈星宇</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">学　号：</span>
+                        <span class="value">24330101150091</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">身份证号：</span>
+                        <span class="value">44010620020315****</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">专　业：</span>
+                        <span class="value">计算机科学与技术</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">层　次：</span>
+                        <span class="value">专升本</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">学　制：</span>
+                        <span class="value">2.5年</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">入学时间：</span>
+                        <span class="value">2024年3月</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">预计毕业：</span>
+                        <span class="value">2026年7月</span>
+                    </div>
+                </div>
+                <p class="cert-text">
+                    兹证明 <strong>陈星宇</strong>，性别男，身份证号44010620020315****，系我校计算机科学与技术专业本科层次在读学生。该生自2024年3月入学，学制2.5年，当前学籍状态为<strong>在籍（注册）</strong>。特此证明。
+                </p>
+                <p class="cert-text" style="margin-top:10px;">
+                    本证明仅用于证明学生学籍状态，不作为其他用途。学籍信息可通过中国高等教育学生信息网（学信网）进行在线验证。
+                </p>
+            </div>
+
+            <div class="signature-area">
+                <div class="signature-text">
+                    <p>广东开放大学计算机学院</p>
+                    <p class="date">2026年6月5日</p>
+                </div>
+                <div class="university-seal">
+                    <div class="seal-border"></div>
+                    <div class="seal-star">★</div>
+                    <div class="seal-arc">
+                        <span style="transform: rotate(-60deg)">广</span>
+                        <span style="transform: rotate(-36deg)">东</span>
+                        <span style="transform: rotate(-12deg)">开</span>
+                        <span style="transform: rotate(12deg)">放</span>
+                        <span style="transform: rotate(36deg)">大</span>
+                        <span style="transform: rotate(60deg)">学</span>
+                    </div>
+                    <div class="seal-number">No.51315080901</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-bar">
+        <div class="verification">
+            <span>🔗 官方验证：</span>
+            <a href="https://my.chsi.com.cn/archive/index.jsp" target="_blank" title="学信网学籍验证">学信网在线验证</a>
+            <a href="https://www.ougd.cn/" target="_blank" title="广东开放大学官网">学校官网</a>
+        </div>
+        <div>
+            <button class="btn-print" onclick="window.print()">🖨️ 打印本证明</button>
+            <a href="https://www.ougd.cn/jxjy.htm" target="_blank" style="margin-left:8px;" title="教学教务">教务通知</a>
+        </div>
+    </div>
+
+    <script>
+        console.log('广东开放大学在读证明（学号24330101150091）已生成。');
+    </script>
+</body>
+</html>
